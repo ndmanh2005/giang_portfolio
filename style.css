@@ -15,19 +15,27 @@ body {
 }
 
 /* === 2. HERO SECTION (POSTER STYLE) TỐI ƯU === */
+/* === 2. HERO SECTION (POSTER STYLE) TỐI ƯU === */
 .hero-container {
-    position: sticky; /* Dính lại */
+    position: sticky;
     top: 0;
     height: 100vh;
     width: 100%;
-    z-index: 0; /* Nằm dưới */
-    background-color: #A8322D; /* Màu đỏ gạch */
+    
+    /* SỬA: Tăng z-index lên 1 để đè lên Footer */
+    z-index: 1; 
+    
+    /* SỬA: Xóa dòng background-color ở đây (hoặc comment lại) */
+    /* background-color: #A8322D; */ 
+    
     overflow: hidden;
 }
 
 .hero-content-wrapper {
     height: 100%;
     width: 100%;
+
+    background-color: #A8322D;
     padding: 60px 80px; /* Căn lề 4 phía */
     display: flex;
     flex-direction: column;
@@ -109,15 +117,25 @@ body {
 }
 
 /* === 3. CONTENT LAYER (TRẮNG TRƯỢT LÊN) TỐI ƯU === */
+/* === 3. CONTENT LAYER (TRẮNG TRƯỢT LÊN) TỐI ƯU === */
 .content-layer {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Đảm bảo nằm TRÊN footer */
     background-color: #fff;
     min-height: 100vh;
-    padding-top: 0; /* Xóa đệm để video dính sát mép trên */
-    border-radius: 40px 40px 0 0; /* Bo góc tạo hình thẻ bài */
-    overflow: hidden; /* Cắt phần thừa của video để khớp với bo góc */
-    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.1);
+    padding-top: 0;
+    
+    /* SỬA: Bo tròn cả 4 góc (thêm 2 góc dưới) */
+    border-radius: 40px; 
+    
+    overflow: hidden; 
+    
+    /* SỬA: Thêm bóng đổ để tạo cảm giác "nổi" lên trên footer */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+    
+    /* QUAN TRỌNG: Tạo khoảng trống để footer hiện ra khi cuộn hết */
+    /* Giá trị này phải bằng hoặc lớn hơn chiều cao của footer (.red-footer) */
+    margin-bottom: 400px; 
 }
 
 /* === VIDEO INTRO FULL MÀN HÌNH TỐI ƯU === */
@@ -212,20 +230,33 @@ body {
     padding: 100px 20px 100px 20px;
 }
 
+/* === WORKS HEADER & FILTER TỐI ƯU === */
 .works-header {
-    text-align: center;
+    /* Kỹ thuật phá vỡ khung 1200px để tràn ra 100% màn hình */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    text-align: center; /* Căn giữa chữ so với toàn màn hình */
     margin-bottom: 80px;
     padding-top: 60px;
 }
 
 .huge-red-title {
-    font-size: 8rem;
+    /* GIẢM TỪ 12vw XUỐNG 9.5vw */
+    /* 9.5vw là con số an toàn cho cụm từ dài khoảng 13-14 ký tự */
+    font-size: 9.5vw; 
+    
     font-weight: 900;
     color: #A8322D;
     text-transform: uppercase;
     line-height: 0.9;
     letter-spacing: 2px;
     margin: 0 0 40px 0;
+    white-space: nowrap;
 }
 
 .works-filter-menu {
@@ -404,10 +435,26 @@ body {
 .coin-2 { bottom: 40%; right: 25%; }
 
 /* === 4. FOOTER TỐI ƯU === */
+/* === 4. FOOTER TỐI ƯU === */
 .red-footer {
     background-color: #A8322D;
     color: #fff;
     padding: 100px 40px 60px 40px;
+    
+    /* SỬA: Thêm các thuộc tính sau để cố định footer */
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0; /* Nằm DƯỚI content-layer */
+    
+    /* Đặt chiều cao cố định để khớp với margin-bottom ở trên */
+    height: 400px; 
+    
+    /* Căn chỉnh nội dung footer vào giữa chiều cao (tùy chọn) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 .footer-content {
     max-width: 1200px;
