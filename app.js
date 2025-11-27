@@ -128,25 +128,26 @@ document.addEventListener("DOMContentLoaded", function() {
     // ======================================================
 
     // A. KHO DỮ LIỆU (TÊN FILE ĐÃ CHUẨN HÓA)
-    const projectsData = {
-        'branding': [
-            // Branding: Hiện 2 ảnh Branding 1 và 2
-            { title: 'LUUNA', date: 'MAY 2022', src: 'images/project-branding-1.jpg' },
-            { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg' }
-        ],
-        'magazine': [
-            // Magazine: Hiện 1 ảnh Magazine
-            { title: 'VOGUE COVER', date: 'JUN 2023', src: 'images/project-magazine.jpg' }
-        ],
-        'ux-ui': [
-            // UX/UI: Hiện 1 ảnh UX
-            { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg' }
-        ],
-        'visual': [
-            // Visual: Hiện 1 ảnh Visual
-            { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg' }
-        ]
-    };
+// Cập nhật projectsData trong file app.js
+const projectsData = {
+    'branding': [
+        // Branding: 2 file riêng biệt
+        { title: 'LUUNA', date: 'MAY 2022', src: 'images/project-branding-1.jpg', url: 'project-branding-1.html' },
+        { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
+    ],
+    'magazine': [
+        // Magazine
+        { title: 'VOGUE COVER', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
+    ],
+    'ux-ui': [
+        // UX/UI
+        { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg', url: 'project-ux.html' }
+    ],
+    'visual': [
+        // Visual
+        { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg', url: 'project-visual.html' }
+    ]
+};
 
     // B. LẤY CÁC PHẦN TỬ HTML
     const filterButtons = document.querySelectorAll('.filter-item');
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // SLOT 2: Ẩn đi
                 slot2.classList.add('hidden-slot');
-            } 
+            }
             
             // --- TRƯỜNG HỢP: 2 PROJECT (Branding) ---
             else if (dataList.length >= 2) {
@@ -202,4 +203,18 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+    // ======================================================
+    // 6. NAVBAR TRANSITION CHO TRANG PHỤ (NEW)
+    // ======================================================
+    const navbar = document.querySelector('.cs-navbar');
+    
+    if(navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight - 100) {
+                navbar.classList.add('scrolled'); // Thêm nền trắng khi cuộn qua Hero
+            } else {
+                navbar.classList.remove('scrolled'); // Trong suốt khi ở Hero
+            }
+        });
+    }
 });
