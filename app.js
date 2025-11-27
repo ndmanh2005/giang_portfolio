@@ -146,6 +146,12 @@ const projectsData = {
     'visual': [
         // Visual
         { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg', url: 'project-visual.html' }
+    ],
+
+    'packaging': [
+        // Vì chỉ có 1 project nên nó sẽ tự động dùng chế độ "single-center-mode" (ảnh to giữa màn hình)
+        // Bạn nhớ thay đường dẫn ảnh (src) và link (url) sau này nhé
+        { title: 'PACKAGING DESIGN', date: 'DEC 2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
     ]
 };
 
