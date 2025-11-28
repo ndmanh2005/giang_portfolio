@@ -281,10 +281,10 @@ body {
     transition: all 0.3s ease;
 }
 
-.filter-item:hover {
+ .filter-item:hover {
     color: #A8322D;
     text-decoration-color: #A8322D;
-}
+} 
 
 /* === PROJECT GRID (SCATTERED/EDITORIAL) TỐI ƯU === */
 .project-grid-scattered-final {
@@ -406,120 +406,126 @@ body {
 
 /* ICON TRANG TRÍ */
 /* === DECORATION ELEMENTS (STICKERS) - ĐÃ CHỈNH THEO ẢNH MẪU === */
+/* =========================================
+   ICON TRANG TRÍ (BỐ CỤC MỚI - ẢNH 2)
+   ========================================= */
+
+/* =========================================
+   STICKER LAYOUT (STYLE SETH LUKIN)
+   ========================================= */
+
+/* =========================================
+   STICKER LAYOUT (SETH LUKIN STYLE - SÁT LỀ)
+   ========================================= */
+
+/* =========================================
+   FIX LỖI STICKER KHÔNG ĐỔI (Dán vào cuối file)
+   ========================================= */
+
+/* Container bao trùm */
 .deco-elements {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    poUrbanist-events: none; /* Để không che mất chữ */
+    pointer-events: none;
     z-index: 1;
+    overflow: hidden; /* Cắt phần sticker bị lòi ra ngoài */
 }
 
-/* Class chung cho các vật thể */
+/* Các vật thể chung */
 .deco-obj {
-    position: absolute;
-    image-rendering: pixelated; /* Giữ nét pixel */
+    position: absolute !important; /* Ép nhận vị trí */
+    image-rendering: pixelated;
+    display: block !important;
 }
 
+/* Kích thước Tem */
 .deco-stamp {
-    width: 100px; /* Kích thước tem */
+    width: 110px !important;
+    height: auto;
 }
 
-/* Thanh Pixel (Tự vẽ bằng CSS) */
-.pixel-platform {
-    position: absolute;
-    width: 140px;
-    height: 20px;
-    background: #fff; /* Nền trắng */
-    border: 2px solid #000;
-    box-shadow: 4px 4px 0px #000; /* Bóng đổ cứng */
-    background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
-                      linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
-    background-size: 10px 10px;
-    background-position: 0 0, 5px 5px;
-    opacity: 0.8;
-}
-
-.pixel-platform.small {
-    width: 80px; /* Thanh ngắn cho chỗ để xu */
-    position: relative; /* Để nằm trong group coin */
-    box-shadow: 2px 2px 0px #000;
-}
-
-/* --- VỊ TRÍ CỘT TRÁI --- */
-
-/* 1. Con trỏ chuột */
-.pos-left-1 {
-    width: 30px;
-    top: 5%;
-    left: 10%;
-    transform: rotate(-15deg);
-}
-
-/* 2. Thanh dài trái */
-.pos-left-2 {
-    top: 15%;
-    left: 8%;
-}
-
-/* 3. Tem Đỏ New School */
-.pos-left-3 {
-    top: 30%;
-    left: 5%;
-    transform: rotate(-15deg);
-}
-
-/* 4. Chồng xu trái */
-.coin-stack {
-    position: absolute;
+/* --- LOGIC NHÓM XU --- */
+.coin-group {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.pixel-coin {
-    width: 30px;
-    margin-bottom: -15px; /* Để xu chồng lên nhau */
+.coin-stack {
+    display: flex;
+    gap: 5px;
+    margin-bottom: -8px; /* Xu đè lên bệ */
     z-index: 2;
-    position: relative;
 }
+.pixel-coin {
+    width: 35px !important;
+    animation: floatCoin 3s infinite ease-in-out;
+}
+.pixel-coin:nth-child(2) { animation-delay: 1.5s; }
+.coin-platform { width: 100px !important; }
+
+@keyframes floatCoin {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* --- VỊ TRÍ CỰC KỲ SÁT LỀ (SETH LUKIN STYLE) --- */
+
+/* TRÁI 1: Thanh Pixel (Trên cùng) -> Thụt lùi ra ngoài mép */
+.pos-left-1 {
+    width: 140px !important;
+    top: 12% !important;
+    left: -30px !important; /* Thụt ra ngoài màn hình */
+}
+
+/* TRÁI 2: Tem Đỏ -> Sát mép */
+.pos-left-2 {
+    top: 32% !important;
+    left: 10px !important; /* Cách lề cực nhỏ */
+    transform: rotate(-15deg);
+}
+
+/* TRÁI 3: Nhóm Xu -> Sát mép */
+.pos-left-3 {
+    top: 55% !important;
+    left: 10px !important;
+}
+
+/* TRÁI 4: Tem Cam -> Sát mép dưới */
 .pos-left-4 {
-    top: 55%;
-    left: 5%;
+    bottom: 15% !important;
+    left: 20px !important;
+    transform: rotate(10deg);
 }
 
-/* 5. Tem Cam W */
-.pos-left-5 {
-    bottom: 10%;
-    left: 12%;
-    transform: rotate(-10deg);
-}
 
-/* --- VỊ TRÍ CỘT PHẢI --- */
-
-/* 1. Chồng xu phải */
+/* PHẢI 1: Nhóm Xu (Trên cùng) -> Sát mép */
 .pos-right-1 {
-    top: 15%;
-    right: 12%;
+    top: 18% !important;
+    right: 10px !important;
 }
 
-/* 2. Tem Đen School Art */
+/* PHẢI 2: Tem Đen -> Sát mép */
 .pos-right-2 {
-    top: 45%;
-    right: 8%;
+    top: 45% !important;
+    right: 10px !important;
     transform: rotate(15deg);
 }
 
-/* 3. Thanh dài phải */
+/* PHẢI 3: Thanh Pixel (Dưới cùng) -> Thụt lùi ra ngoài mép */
 .pos-right-3 {
-    bottom: 15%;
-    right: 5%;
+    width: 140px !important;
+    bottom: 20% !important;
+    right: -30px !important; /* Thụt ra ngoài màn hình */
 }
 
-/* Responsive: Ẩn bớt trên mobile để đỡ rối */
-@media (max-width: 768px) {
-    .deco-elements { opacity: 0.3; } /* Làm mờ sticker trên mobile */
-    .pos-left-2, .pos-right-3 { display: none; } /* Ẩn bớt thanh dài */
+/* --- MOBILE --- */
+@media (max-width: 1024px) {
+    .deco-elements { opacity: 0.3; }
+    /* Ẩn bớt trên mobile */
+    .pos-left-1, .pos-right-3, .pos-left-3, .pos-right-1 { display: none !important; }
 }
 /* === 4. FOOTER TỐI ƯU === */
 /* === 4. FOOTER TỐI ƯU === */
@@ -1469,3 +1475,34 @@ overflow: hidden;
     }
 }
 
+/* --- FIX LỖI KHÔNG BẤM ĐƯỢC VÀO DỰ ÁN --- */
+.scatter-final {
+    position: relative; 
+    z-index: 10; /* Đưa dự án nổi cao hơn cây cối (z-index: 1) */
+}
+
+/* =========================================
+   FIX LỖI CON TRỎ CHUỘT CHẶN CLICK
+   (Dán đè vào cuối file style.css)
+   ========================================= */
+
+.custom-cursor {
+    /* Quan trọng nhất: Cho phép chuột xuyên qua ảnh để bấm nút bên dưới */
+    pointer-events: none !important; 
+    
+    /* Đảm bảo nó nổi lên trên nhưng không chặn tương tác */
+    z-index: 9999 !important;
+}
+
+/* Đảm bảo menu bộ lọc luôn nổi cao hơn các layer trang trí khác */
+.works-filter-menu {
+    position: relative;
+    z-index: 10000 !important; /* Cao hơn cả sticker */
+    cursor: pointer;
+}
+
+.filter-item {
+    pointer-events: auto !important; /* Ép buộc nút phải nhận click */
+    position: relative;
+    z-index: 10001 !important;
+}

@@ -1,226 +1,185 @@
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("App.js đang chạy..."); // Kiểm tra xem file có nạp được không
 
     // ======================================================
-    // 1. HIỆU ỨNG FADE-IN (CÁC PHẦN TỬ HIỆN DẦN KHI CUỘN)
+    // 1. KHO DỮ LIỆU DỰ ÁN
     // ======================================================
-    const elementsToFadeIn = document.querySelectorAll('.fade-in');
+    const projectsData = {
+        'branding': [
+            { title: 'LUUNA', date: 'MAY 2022', src: 'images/project-branding-1.jpg', url: 'project-branding-1.html' },
+            { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
+        ],
+        'magazine': [
+            { title: 'VOGUE COVER', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
+        ],
+        'ux-ui': [
+            { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg', url: 'project-ux.html' }
+        ],
+        'visual': [
+            { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg', url: 'project-visual.html' }
+        ],
+        'packaging': [
+            { title: 'PACKAGING DESIGN', date: 'DEC 2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
+        ]
+    };
+
+    // ======================================================
+    // 2. LOGIC FILTER (ĐÃ ĐỒNG BỘ TÊN VỚI HTML)
+    // ======================================================
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                // Tùy chọn: Ngừng theo dõi sau khi đã hiện
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, { threshold: 0.1 }); // Hiện khi lọt vào 10% màn hình
-
-    elementsToFadeIn.forEach(el => observer.observe(el));
-
-
-    // ======================================================
-    // 2. CON TRỎ CHUỘT (DI CHUYỂN & ĐỔI MÀU)
-    // ======================================================
-    const cursor = document.querySelector('.custom-cursor');
-    const whiteSection = document.getElementById('white-section');
+    // Lấy tất cả các thẻ có class="filter-item" trong HTML
+    const filterItems = document.querySelectorAll('.filter-item');
     
-    // A. Giúp con trỏ đi theo chuột
-    window.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+    const slot1 = document.getElementById('slot-1');
+    const slot2 = document.getElementById('slot-2');
+
+    // Hàm cập nhật nội dung cho từng ô (Slot)
+    function updateSlot(slotId, imgId, titleId, dateId, linkId, data) {
+        if (!data) return; // Nếu không có dữ liệu thì thoát ngay
+
+        const imgElement = document.getElementById(imgId);
+        const titleElement = document.getElementById(titleId);
+        const dateElement = document.getElementById(dateId);
+        const linkElement = document.getElementById(linkId);
+
+        // Cập nhật Ảnh
+        if (imgElement) imgElement.src = data.src;
         
-        // B. Logic đổi màu "dự phòng" (Check liên tục khi di chuyển)
-        // Nếu chuột đang nằm trên vùng trắng mà chưa có class đỏ -> Thêm vào ngay
-        // (Khắc phục lỗi khi tải lại trang mà đang cuộn sẵn ở dưới)
-        if (whiteSection.matches(':hover')) {
-            cursor.classList.add('red-mode');
-        } else {
-            cursor.classList.remove('red-mode');
+        // Cập nhật Chữ
+        if (titleElement) titleElement.innerText = data.title;
+        if (dateElement) dateElement.innerText = data.date;
+
+        // Cập nhật Link (QUAN TRỌNG ĐỂ NHẢY TRANG)
+        if (linkElement && data.url) {
+            linkElement.href = data.url;
         }
-    });
+    }
 
-    // C. Logic đổi màu chính (Khi chuột đi vào/ra vùng trắng)
-    if (whiteSection) {
-        // Khi vào vùng nội dung trắng -> Biến thành ĐỎ
-        whiteSection.addEventListener('mouseenter', () => {
-            cursor.classList.add('red-mode');
-        });
+    // Gắn sự kiện Click cho từng nút Filter
+    if (filterItems.length > 0) {
+        filterItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault(); // Ngăn trang web nhảy lên đầu
 
-        // Khi ra khỏi vùng nội dung (về lại Hero đỏ) -> Biến thành TRẮNG
-        whiteSection.addEventListener('mouseleave', () => {
-            cursor.classList.remove('red-mode');
+                console.log("Đã bấm vào:", item.innerText); // Kiểm tra xem bấm có nhận không
+
+                // 1. Xóa class active ở nút cũ, thêm vào nút mới bấm
+                filterItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                // 2. Lấy loại dự án từ attribute data-filter (VD: branding, packaging)
+                const filterType = item.getAttribute('data-filter');
+                
+                // 3. Lấy danh sách dự án tương ứng từ kho dữ liệu
+                const dataList = projectsData[filterType] || projectsData['branding'];
+
+                // 4. Hiển thị ra màn hình
+                if (dataList.length === 1) {
+                    // --- CHẾ ĐỘ 1 ẢNH (Packaging, Magazine...) ---
+                    
+                    // Hiện Slot 1, chuyển sang chế độ ảnh to giữa
+                    slot1.classList.remove('hidden-slot');
+                    slot1.classList.add('single-center-mode');
+                    
+                    // Cập nhật nội dung Slot 1 (Kèm link-1)
+                    updateSlot('slot-1', 'img-1', 'title-1', 'date-1', 'link-1', dataList[0]);
+
+                    // Ẩn Slot 2
+                    slot2.classList.add('hidden-slot');
+                } 
+                else if (dataList.length >= 2) {
+                    // --- CHẾ ĐỘ 2 ẢNH (Branding) ---
+                    
+                    // Slot 1: Hiện, bỏ chế độ giữa (về bên trái)
+                    slot1.classList.remove('hidden-slot', 'single-center-mode');
+                    updateSlot('slot-1', 'img-1', 'title-1', 'date-1', 'link-1', dataList[0]);
+
+                    // Slot 2: Hiện
+                    slot2.classList.remove('hidden-slot');
+                    updateSlot('slot-2', 'img-2', 'title-2', 'date-2', 'link-2', dataList[1]);
+                }
+            });
         });
+    } else {
+        console.error("LỖI: Không tìm thấy class .filter-item trong HTML!");
     }
 
 
     // ======================================================
-    // 3. HIỆU ỨNG SCROLL HERO (SETH LUKIN STYLE)
-    // (Thu nhỏ + Mờ dần + Nhòe đi khi cuộn xuống)
+    // 3. CÁC HIỆU ỨNG KHÁC (GIỮ NGUYÊN)
     // ======================================================
+
+    // Fade In
+    const elementsToFadeIn = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, { threshold: 0.1 });
+    elementsToFadeIn.forEach(el => observer.observe(el));
+
+    // Custom Cursor
+    const cursor = document.querySelector('.custom-cursor');
+    const whiteSection = document.getElementById('white-section');
+    if (cursor) {
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            if (whiteSection && whiteSection.matches(':hover')) cursor.classList.add('red-mode');
+            else cursor.classList.remove('red-mode');
+        });
+    }
+
+    // Scroll Hero Effect
     const heroContent = document.getElementById('hero-effect');
-
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        
-        // Tính toán tiến độ cuộn (từ 0 đến 1)
-        let progress = scrollY / windowHeight;
-        
-        // Giới hạn max là 1 để không tính toán thừa
-        if (progress > 1) progress = 1;
-
-        // Công thức hiệu ứng:
-        // - Scale: Giảm từ 1 xuống 0.8 (thu nhỏ 20%)
-        // - Opacity: Giảm từ 1 xuống 0 (mờ dần, nhân 1.5 để mờ nhanh hơn chút)
-        const scale = 1 - (progress * 0.2);
-        const opacity = 1 - (progress * 1.5);
-
-        if (heroContent) {
+    if (heroContent) {
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            let progress = scrollY / windowHeight;
+            if (progress > 1) progress = 1;
+            const scale = 1 - (progress * 0.2);
+            const opacity = 1 - (progress * 1.5);
             heroContent.style.transform = `scale(${scale})`;
             heroContent.style.opacity = opacity > 0 ? opacity : 0;
-            
-            // Thêm hiệu ứng làm mờ (Blur) tăng dần để tạo chiều sâu
             heroContent.style.filter = `blur(${progress * 10}px)`;
-        }
-    });
+        });
+    }
 
-// ======================================================
-    // 4. SKILLS FOCUS EFFECT (BIÊN ĐỘ ỔN ĐỊNH VÀ MẠNH MẼ)
-    // ======================================================
-    const skillsList = document.querySelector('.skills-list-focus');
+    // Skills Focus
     const skillItems = document.querySelectorAll('.skill-item-focus');
-
     function calculateFocus() {
+        if(skillItems.length === 0) return;
         const viewportCenter = window.innerHeight / 2;
-
         skillItems.forEach(item => {
             const rect = item.getBoundingClientRect();
             const itemCenter = rect.top + rect.height / 2;
-
             const distance = Math.abs(viewportCenter - itemCenter);
             const maxDistance = 350; 
             let factor = 1 - Math.min(1, distance / maxDistance); 
-            
-            // 1. Scale: Từ 1.0 (nhỏ nhất) đến 1.8 (lớn nhất) -> Biên độ tối ưu
             const scaleValue = 1.0 + (factor * 0.8); 
-            
-            // 2. Opacity: Từ 0.3 (mờ nhất) đến 1.0 (rõ nhất)
             const opacityValue = 0.3 + (factor * 0.7); 
-
-            // 3. Font Weight & Color (Vẫn giữ logic đen/xám)
             const fontWeight = 400 + Math.round(factor * 500); 
             const lightness = 80 - (factor * 80); 
-
-            
-            
             item.style.color = `hsl(0, 0%, ${lightness}%)`;
             item.style.transform = `scale(${scaleValue})`;
             item.style.opacity = opacityValue;
             item.style.fontWeight = fontWeight;
         });
     }
-
     window.addEventListener('scroll', calculateFocus);
     calculateFocus();
 
-// ======================================================
-    // 5. LOGIC FILTER: BRAND (2 ẢNH) - CÒN LẠI (1 ẢNH)
-    // ======================================================
-
-    // A. KHO DỮ LIỆU (TÊN FILE ĐÃ CHUẨN HÓA)
-// Cập nhật projectsData trong file app.js
-const projectsData = {
-    'branding': [
-        // Branding: 2 file riêng biệt
-        { title: 'LUUNA', date: 'MAY 2022', src: 'images/project-branding-1.jpg', url: 'project-branding-1.html' },
-        { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
-    ],
-    'magazine': [
-        // Magazine
-        { title: 'VOGUE COVER', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
-    ],
-    'ux-ui': [
-        // UX/UI
-        { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg', url: 'project-ux.html' }
-    ],
-    'visual': [
-        // Visual
-        { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg', url: 'project-visual.html' }
-    ],
-
-    'packaging': [
-        // Vì chỉ có 1 project nên nó sẽ tự động dùng chế độ "single-center-mode" (ảnh to giữa màn hình)
-        // Bạn nhớ thay đường dẫn ảnh (src) và link (url) sau này nhé
-        { title: 'PACKAGING DESIGN', date: 'DEC 2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
-    ]
-};
-
-    // B. LẤY CÁC PHẦN TỬ HTML
-    const filterButtons = document.querySelectorAll('.filter-item');
-    const slot1 = document.getElementById('slot-1');
-    const slot2 = document.getElementById('slot-2');
-    
-    // Hàm cập nhật nội dung
-    function updateSlotContent(slotId, imgId, titleId, dateId, data) {
-        const img = document.getElementById(imgId);
-        const title = document.getElementById(titleId);
-        const date = document.getElementById(dateId);
-        
-        if(img) img.src = data.src;
-        if(title) title.innerText = data.title;
-        if(date) date.innerText = data.date;
-    }
-
-    // C. XỬ LÝ SỰ KIỆN CLICK
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            // 1. Đổi màu nút Active
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // 2. Lấy loại dự án
-            const filterType = btn.getAttribute('data-filter');
-            const dataList = projectsData[filterType] || projectsData['branding'];
-
-            // 3. Logic hiển thị (1 hay 2 project?)
-            
-            // --- TRƯỜNG HỢP: 1 PROJECT (Magazine, UX, Visual) ---
-            if (dataList.length === 1) {
-                // SLOT 1: Hiện & To giữa
-                slot1.classList.remove('hidden-slot');
-                slot1.classList.add('single-center-mode');
-                updateSlotContent('slot-1', 'img-1', 'title-1', 'date-1', dataList[0]);
-
-                // SLOT 2: Ẩn đi
-                slot2.classList.add('hidden-slot');
-            }
-            
-            // --- TRƯỜNG HỢP: 2 PROJECT (Branding) ---
-            else if (dataList.length >= 2) {
-                // SLOT 1: Hiện & Trả về vị trí trái (bỏ To giữa)
-                slot1.classList.remove('hidden-slot', 'single-center-mode');
-                updateSlotContent('slot-1', 'img-1', 'title-1', 'date-1', dataList[0]);
-
-                // SLOT 2: Hiện & Vị trí phải
-                slot2.classList.remove('hidden-slot');
-                updateSlotContent('slot-2', 'img-2', 'title-2', 'date-2', dataList[1]);
-            }
-        });
-    });
-    // ======================================================
-    // 6. NAVBAR TRANSITION CHO TRANG PHỤ (NEW)
-    // ======================================================
+    // Navbar Transition
     const navbar = document.querySelector('.cs-navbar');
-    
     if(navbar) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > window.innerHeight - 100) {
-                navbar.classList.add('scrolled'); // Thêm nền trắng khi cuộn qua Hero
-            } else {
-                navbar.classList.remove('scrolled'); // Trong suốt khi ở Hero
-            }
+            if (window.scrollY > window.innerHeight - 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
     }
+
 });
