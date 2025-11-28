@@ -302,10 +302,23 @@ body {
 
 .image-wrapper-raw {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    border: 1px solid #000;
+    /* aspect-ratio giữ nguyên tùy theo code cũ của bạn */
+    
+    /* --- THÊM/SỬA DÒNG NÀY ĐỂ TẠO VIỀN ĐEN --- */
+    border: 2px solid #000 !important; /* Viền đen 2px bao quanh toàn bộ ảnh */
+    
     overflow: hidden;
     transition: transform 0.3s ease;
+    
+    /* Đảm bảo không còn gạch thừa nào */
+    position: relative;
+}
+
+/* Xóa triệt để các gạch đen nếu còn sót */
+.image-wrapper-raw::before,
+.image-wrapper-raw::after {
+    display: none !important;
+    content: none !important;
 }
 
 .image-wrapper-raw.vertical-tall {
@@ -1505,4 +1518,30 @@ overflow: hidden;
     pointer-events: auto !important; /* Ép buộc nút phải nhận click */
     position: relative;
     z-index: 10001 !important;
+}
+
+/* =========================================
+   XÓA SẠCH VIỀN VÀ THANH TRANG TRÍ
+   (Dán vào cuối file style.css)
+   ========================================= */
+
+.image-wrapper-raw {
+    /* 1. Xóa viền bao quanh */
+    border: none !important; 
+    outline: none !important;
+    box-shadow: none !important;
+    
+    /* 2. Đảm bảo hiển thị bình thường */
+    overflow: hidden !important;
+    background: transparent !important;
+}
+
+/* 3. Xóa TUYỆT ĐỐI các thanh gạch đen (pseudo-elements) */
+.image-wrapper-raw::before,
+.image-wrapper-raw::after {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
 }
