@@ -436,31 +436,106 @@ body {
    ========================================= */
 
 /* Container bao trùm */
+/* =========================================
+   STICKER ORBIT LAYOUT (BỐ CỤC VỆ TINH)
+   ========================================= */
+
 .deco-elements {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none !important; /* Chuột xuyên qua để bấm chữ */
     z-index: 1;
-    overflow: hidden; /* Cắt phần sticker bị lòi ra ngoài */
+    overflow: visible;
 }
 
-/* Các vật thể chung */
 .deco-obj {
-    position: absolute !important; /* Ép nhận vị trí */
+    position: absolute !important;
     image-rendering: pixelated;
-    display: block !important;
-}
-
-/* Kích thước Tem */
-.deco-stamp {
-    width: 110px !important;
+    width: 80px; /* Kích thước trung bình, bạn có thể chỉnh riêng từng cái */
     height: auto;
+    transition: transform 0.3s ease;
 }
 
-/* --- LOGIC NHÓM XU --- */
+/* --- ĐỊNH VỊ TỌA ĐỘ (MÔ PHỎNG ẢNH 2) --- */
+
+/* --- ĐỊNH VỊ TỌA ĐỘ MỚI (TẢN RỘNG RA NHƯ ẢNH 2) --- */
+
+/* =========================================
+   STICKER LAYOUT - PHIÊN BẢN RỘNG & SÁT LỀ (FINAL)
+   ========================================= */
+
+/* --- ĐỊNH VỊ TỌA ĐỘ MỚI (VÒNG CUNG RỘNG) --- */
+
+/* 1. Góc trên Trái (Quả Táo) - Đẩy cao lên và sát lề trái hơn */
+.pos-orbit-1 {
+    top: 5% !important;    
+    left: 15% !important;   /* Cách lề một chút để tạo góc bo */
+    transform: rotate(-15deg);
+    width: 80px;
+}
+
+/* 2. Góc trên Phải (Đám Mây) - Đối xứng */
+.pos-orbit-2 {
+    top: 5% !important;
+    right: 15% !important; 
+    transform: rotate(10deg);
+    width: 90px;
+}
+
+/* 3. Giữa Trái - Cao (Phong bì) -> SÁT SẠT LỀ */
+.pos-orbit-3 {
+    top: 30% !important;    /* Kéo lên cao hơn */
+    left: 1% !important;    /* Sát mép (1%) */
+    transform: rotate(-5deg);
+    width: 70px;
+}
+
+/* 4. Giữa Phải - Cao (Chó 1) -> SÁT SẠT LỀ */
+.pos-orbit-4 {
+    top: 30% !important;
+    right: 1% !important;   /* Sát mép (1%) */
+    transform: rotate(15deg);
+    width: 75px;
+}
+
+/* 5. Giữa Trái - Thấp (Chó 2) -> SÁT SẠT LỀ */
+.pos-orbit-5 {
+    top: 65% !important;    /* Kéo xuống thấp hẳn */
+    left: 2% !important;    /* Sát mép */
+    transform: rotate(5deg);
+    width: 85px;
+}
+
+/* 6. Giữa Phải - Thấp (Tin nhắn) -> SÁT SẠT LỀ */
+.pos-orbit-6 {
+    top: 65% !important;
+    right: 2% !important;
+    transform: rotate(-10deg);
+    width: 80px;
+}
+
+/* 7. Đáy Trái (Đồng hồ cát) - Nằm thấp và bo vào */
+.pos-orbit-7 {
+    top: auto !important;   
+    bottom: 5% !important;  
+    left: 20% !important;   /* Đẩy vào trong để đỡ khối chữ */
+    transform: rotate(0deg);
+    width: 100px;
+}
+
+/* 8. Đáy Phải (Gậy sao) - Nằm thấp và bo vào */
+.pos-orbit-8 {
+    top: auto !important;
+    bottom: 5% !important;
+    right: 20% !important;
+    transform: rotate(-20deg);
+}
+
+
+/* --- LOGIC CHO COIN (NẾU DÙNG) --- */
 .coin-group {
     display: flex;
     flex-direction: column;
@@ -469,105 +544,88 @@ body {
 .coin-stack {
     display: flex;
     gap: 5px;
-    margin-bottom: -8px; /* Xu đè lên bệ */
-    z-index: 2;
 }
 .pixel-coin {
-    width: 35px !important;
+    width: 30px;
     animation: floatCoin 3s infinite ease-in-out;
 }
-.pixel-coin:nth-child(2) { animation-delay: 1.5s; }
-.coin-platform { width: 100px !important; }
-
 @keyframes floatCoin {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    50% { transform: translateY(-5px); }
 }
 
-/* --- VỊ TRÍ CỰC KỲ SÁT LỀ (SETH LUKIN STYLE) --- */
-
-/* TRÁI 1: Thanh Pixel (Trên cùng) -> Thụt lùi ra ngoài mép */
-.pos-left-1 {
-    width: 140px !important;
-    top: 12% !important;
-    left: -30px !important; /* Thụt ra ngoài màn hình */
-}
-
-/* TRÁI 2: Tem Đỏ -> Sát mép */
-.pos-left-2 {
-    top: 32% !important;
-    left: 10px !important; /* Cách lề cực nhỏ */
-    transform: rotate(-15deg);
-}
-
-/* TRÁI 3: Nhóm Xu -> Sát mép */
-.pos-left-3 {
-    top: 55% !important;
-    left: 10px !important;
-}
-
-/* TRÁI 4: Tem Cam -> Sát mép dưới */
-.pos-left-4 {
-    bottom: 15% !important;
-    left: 20px !important;
-    transform: rotate(10deg);
-}
-
-
-/* PHẢI 1: Nhóm Xu (Trên cùng) -> Sát mép */
-.pos-right-1 {
-    top: 18% !important;
-    right: 10px !important;
-}
-
-/* PHẢI 2: Tem Đen -> Sát mép */
-.pos-right-2 {
-    top: 45% !important;
-    right: 10px !important;
-    transform: rotate(15deg);
-}
-
-/* PHẢI 3: Thanh Pixel (Dưới cùng) -> Thụt lùi ra ngoài mép */
-.pos-right-3 {
-    width: 140px !important;
-    bottom: 20% !important;
-    right: -30px !important; /* Thụt ra ngoài màn hình */
-}
-
-/* --- MOBILE --- */
-@media (max-width: 1024px) {
-    .deco-elements { opacity: 0.3; }
-    /* Ẩn bớt trên mobile */
-    .pos-left-1, .pos-right-3, .pos-left-3, .pos-right-1 { display: none !important; }
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 1200px) {
+    .deco-elements { opacity: 0.2; } /* Làm mờ hẳn để không rối mắt */
+    /* Ẩn bớt các sticker ở giữa để chừa chỗ cho chữ */
+    .pos-orbit-3, .pos-orbit-4, .pos-orbit-5, .pos-orbit-6 { display: none !important; }
 }
 /* === 4. FOOTER TỐI ƯU === */
 /* === 4. FOOTER TỐI ƯU === */
+/* =========================================
+   KHÔI PHỤC FOOTER VỀ TRẠNG THÁI GỐC
+   (Dán đè vào phần Footer trong style.css)
+   ========================================= */
+
 .red-footer {
-    background-color: #A8322D;
-    color: #fff;
-    padding: 100px 40px 60px 40px;
-    
-    /* SỬA: Thêm các thuộc tính sau để cố định footer */
-    position: fixed; 
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 0; /* Nằm DƯỚI content-layer */
+    height: 400px; /* Chiều cao cố định */
+    z-index: 0;    /* Nằm dưới lớp nội dung */
     
-    /* Đặt chiều cao cố định để khớp với margin-bottom ở trên */
-    height: 400px; 
+    background-color: #A8322D;
+    color: #fff;
     
-    /* Căn chỉnh nội dung footer vào giữa chiều cao (tùy chọn) */
+    padding: 100px 40px 60px 40px;
+    box-sizing: border-box;
+    
+    /* Căn giữa toàn bộ khối nội dung theo chiều dọc */
     display: flex;
     flex-direction: column;
     justify-content: center; 
 }
+
 .footer-content {
+    width: 100%;
+    max-width: 1200px; /* Giới hạn chiều rộng để thẳng hàng với web */
+    margin: 0 auto;    /* Căn giữa khung */
+    
+    display: flex;
+    justify-content: space-between; /* Đẩy chữ sang 2 bên */
+    align-items: flex-end; /* Căn đáy dòng chữ */
+}
+
+/* Phần chữ Copyright bên dưới */
+.footer-bottom {
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 40px auto 0 auto; /* Cách phần trên 40px */
+    
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    font-weight: 700;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .red-footer {
+        position: relative; /* Mobile không cần fixed */
+        height: auto;
+        padding: 60px 20px;
+        z-index: 1;
+    }
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 40px;
+    }
 }
 .footer-content h2 { font-size: 4rem; line-height: 1; font-weight: 900; }
 .footer-links a { color: #fff; margin-left: 30px; font-size: 1.2rem; font-weight: 700; }
@@ -1455,6 +1513,11 @@ overflow: hidden;
     margin-top: 0;    /* Xóa margin cũ */
     padding: 0 40px;
     box-sizing: border-box;
+
+    opacity: 0; /* Mặc định ẩn đi */
+    transform: scale(0.9); /* Thu nhỏ nhẹ một chút để lát nữa phóng to ra */
+    will-change: opacity, transform; /* Tối ưu hiệu năng cho trình duyệt */
+    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
 }
 
 /* 2. Nội dung trượt bên trên */

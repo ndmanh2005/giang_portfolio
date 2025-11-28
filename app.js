@@ -1,5 +1,33 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("App.js đang chạy..."); // Kiểm tra xem file có nạp được không
+    // ======================================================
+    // 0. KÍCH HOẠT LENIS SMOOTH SCROLL (LƯỚT MƯỢT)
+    // ======================================================
+    // Kiểm tra xem thư viện đã nạp chưa để tránh lỗi
+    if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+            duration: 1.2,      // Thời gian trôi (càng cao càng mượt, mặc định 1.2)
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Hiệu ứng dừng từ từ
+            direction: 'vertical', 
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1, // Độ nhạy chuột
+            smoothTouch: false, // Tắt trên điện thoại (để lướt tự nhiên hơn)
+            touchMultiplier: 2,
+        });
+
+        // Hàm lặp để cập nhật chuyển động
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+        
+        console.log("Lenis Smooth Scroll đã kích hoạt!");
+    } else {
+        console.warn("Chưa nạp thư viện Lenis! Hãy thêm thẻ script vào HTML.");
+    }
 
     // ======================================================
     // 1. KHO DỮ LIỆU DỰ ÁN
@@ -10,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
         ],
         'magazine': [
-            { title: 'VOGUE COVER', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
+            { title: 'VOGUE', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
         ],
         'ux-ui': [
             { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg', url: 'project-ux.html' }
@@ -182,4 +210,41 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // ======================================================
+    // 7. FOOTER FADE-IN EFFECT (ÁP DỤNG CHO CẢ 2 LOẠI FOOTER)
+    // ======================================================
+    
+    // Tìm footer: Ưu tiên trang phụ (.cs-footer), nếu không có thì tìm trang chủ (.red-footer)
+    const footer = document.querySelector('.cs-footer') || document.querySelector('.red-footer');
+    
+    if (footer) {
+        // Đặt mặc định ban đầu là hiện rõ (đề phòng JS chưa chạy kịp)
+        // Nhưng CSS đã set opacity: 0 nên nó sẽ mờ.
+        
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY; 
+            const windowHeight = window.innerHeight; 
+            const documentHeight = document.documentElement.scrollHeight; 
+
+            // Tính khoảng cách còn lại tới đáy
+            const remainingDistance = documentHeight - (scrollY + windowHeight);
+            const footerHeight = footer.offsetHeight;
+
+            // Logic tính toán độ mờ
+            if (remainingDistance <= footerHeight + 50) { // +50 để hiệu ứng bắt đầu sớm hơn chút
+                
+                let progress = 1 - (remainingDistance / footerHeight);
+
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                footer.style.opacity = progress;
+                footer.style.transform = `scale(${0.9 + (0.1 * progress)})`;
+                
+            } else {
+                footer.style.opacity = 0;
+                footer.style.transform = `scale(0.9)`;
+            }
+        });
+    }
 });
