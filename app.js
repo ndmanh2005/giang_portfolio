@@ -34,20 +34,20 @@ document.addEventListener("DOMContentLoaded", function() {
     // ======================================================
     const projectsData = {
         'branding': [
-            { title: 'LUUNA', date: 'MAY 2022', src: 'images/project-branding-1.jpg', url: 'project-branding-1.html' },
-            { title: 'TWINBY', date: 'NOV 2021', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
+            { title: 'BOODLE', date: '2023', src: 'images/project-branding-1.jpg', url: 'project-branding-1.html' },
+            { title: 'HON THEN', date: '2025', src: 'images/project-branding-2.jpg', url: 'project-branding-2.html' }
         ],
         'magazine': [
-            { title: 'VOGUE', date: 'JUN 2023', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
+            { title: 'LOFFICIEL', date: '2022', src: 'images/project-magazine.jpg', url: 'project-magazine.html' }
         ],
         'ux-ui': [
-            { title: 'FINTECH APP', date: 'SEP 2023', src: 'images/project-ux.jpg', url: 'project-ux.html' }
+            { title: 'WISE TALK', date: '2022', src: 'images/project-ux.jpg', url: 'project-ux.html' }
         ],
         'visual': [
-            { title: 'ADC SPACE', date: 'NOV 2023', src: 'images/project-visual.jpg', url: 'project-visual.html' }
+            { title: 'HIGH2HI', date: '2024', src: 'images/project-visual.jpg', url: 'project-visual.html' }
         ],
         'packaging': [
-            { title: 'PACKAGING DESIGN', date: 'DEC 2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
+            { title: 'LE FRUIT & HANH TRA', date: '2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
         ]
     };
 
