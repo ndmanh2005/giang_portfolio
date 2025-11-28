@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { title: 'WISE TALK', date: '2022', src: 'images/project-ux.jpg', url: 'project-ux.html' }
         ],
         'visual': [
-            { title: 'HIGH2HI', date: '2024', src: 'images/project-visual.jpg', url: 'project-visual.html' }
+            { title: 'HI2HIGH X QHPCMN', date: '2024', src: 'images/project-visual.jpg', url: 'project-visual.html' }
         ],
         'packaging': [
             { title: 'LE FRUIT & HANH TRA', date: '2023', src: 'images/project-packaging.jpg', url: 'project-packaging.html' }
