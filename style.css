@@ -1015,14 +1015,22 @@ overflow: hidden;
 
 /* Đảm bảo Navbar luôn nổi trên cùng */
 .cs-navbar {
-    z-index: 999;
+    z-index: 100;
     background: transparent; /* Trong suốt để nhìn thấy Hero */
+    opacity: 0;              /* Ẩn hoàn toàn */
+    pointer-events: none;
+    transition: all 0.4s ease;
 }
 
 /* Khi cuộn xuống phần trắng thì Navbar nên có nền mờ (Tùy chọn) */
 .cs-navbar.scrolled {
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.95); /* Hiện nền trắng mờ */
+    opacity: 1;              /* Hiện rõ nội dung */
+    pointer-events: auto;    /* Cho phép bấm nút Close */
+    
+    /* Tùy chọn: Thêm bóng đổ nhẹ để tách biệt với nội dung */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    padding: 20px 40px; /* Thu gọn padding một chút cho đẹp */
 }
 
 /* =========================================
@@ -1607,4 +1615,24 @@ overflow: hidden;
     width: 0 !important;
     height: 0 !important;
     opacity: 0 !important;
+}
+
+/* =========================================
+   STYLE CHO LOGO TRÊN NAVBAR
+   ========================================= */
+
+.nav-logo {
+    height: 40px; /* Chiều cao cố định, chiều rộng tự chỉnh theo */
+    width: auto;
+    display: block;
+    
+    /* Nếu logo của bạn màu đỏ và bạn muốn nó hiện màu đỏ gốc thì giữ nguyên */
+    /* Nếu bạn muốn logo chuyển sang màu đen cho dễ nhìn trên nền trắng thì thêm dòng dưới: */
+    /* filter: brightness(0); */ 
+}
+
+/* Chỉnh lại căn lề cho nav-left một chút nếu cần */
+.nav-left {
+    display: flex;
+    align-items: center;
 }
