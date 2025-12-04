@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="halftone-filter">
+          <feImage result="dots" x="0" y="0" width="10" height="10" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjQiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" />
+          <feTile in="dots" result="pattern" />
+          
+          <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="luminance" />
+          <feComposite in="pattern" in2="luminance" operator="in" />
+        </filter>
+      </defs>
+    </svg>
     <div class="custom-cursor"></div>
 
     <main>

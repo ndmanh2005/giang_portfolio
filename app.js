@@ -247,4 +247,43 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+// ======================================================
+    // 8. LOGIC HALFTONE REVEAL (MỚI)
+    // ======================================================
+    function animateGridReveal() {
+        const projectImages = document.querySelectorAll('.image-wrapper-raw');
+        const windowHeight = window.innerHeight;
+
+        projectImages.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            
+            // Tính toán vị trí
+            const startPoint = windowHeight * 0.9; 
+            const endPoint = windowHeight * 0.4;
+            
+            let progress = (rect.top - endPoint) / (startPoint - endPoint);
+
+            // Kẹp giá trị 0-1
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+
+            // LOGIC ĐẢO NGƯỢC:
+            // progress = 1 (ở dưới đáy) -> Hạt nhỏ (ảnh bị đục lỗ nát bét)
+            // progress = 0 (ở trên cao) -> Hạt to (ảnh liền mạch)
+            
+            // Kích thước hạt (Dot Size): Từ 20% (nhỏ) lên 150% (phủ kín)
+            // Khoảng cách (Spacing): Luôn lớn hơn size một chút để tạo độ mờ biên
+            
+            let dotSize = 140 - (progress * 120); // 140% xuống 20%
+            let spacing = dotSize + 10;           // Spacing luôn to hơn dot chút xíu
+
+            img.style.setProperty('--dot-size', dotSize + '%');
+            img.style.setProperty('--dot-spacing', spacing + '%');
+        });
+
+        requestAnimationFrame(animateGridReveal);
+    }
+
+    animateGridReveal();
 });
