@@ -1718,3 +1718,173 @@ overflow: hidden;
     .nav-links { display: none; }
 }
 
+/* --- CẤU HÌNH KHUNG CHỨA (CONTAINER) --- */
+.cs-hero-section.cloud-mode {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Chiếm gần hết chiều cao màn hình để thoáng */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #fff; /* Đảm bảo nền trắng */
+}
+
+.cloud-container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px; /* Mở rộng khung để giống ảnh */
+    height: 600px;
+}
+
+/* --- STYLE CHO TỪ KHÓA (TAGS) --- */
+.cloud-tag {
+    position: absolute;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    color: #C0C0C0; /* Màu xám nhạt (như ảnh) */
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    
+    /* Mẹo: Dùng translate để căn tâm chính xác tại điểm top/left */
+    transform: translate(-50%, -50%); 
+}
+
+/* Kích thước chữ cho các tag thường */
+.cloud-tag { font-size: 26px; }
+
+/* Riêng từ MOTION GRAPHIC to hơn chút vì nó dài */
+.pos-motion { font-size: 28px; }
+
+/* Từ CREATIVE màu rất nhạt (như ảnh) */
+.pos-creative { 
+    color: #E5E5E5; 
+    font-size: 32px;
+    z-index: 1; /* Nằm dưới các layer khác */
+}
+
+/* Hiệu ứng Hover: Đổi màu đỏ */
+.cloud-tag:hover {
+    color: #B91C1C;
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 100; /* Nổi lên trên cùng khi hover */
+}
+
+/* --- TỌA ĐỘ VỊ TRÍ (Đã đo đạc lại theo ảnh) --- */
+/* Cụm bên trái */
+.pos-2d      { top: 25%; left: 25%; }
+.pos-pack    { top: 38%; left: 32%; }
+.pos-brand   { top: 48%; left: 18%; }
+.pos-ux      { top: 55%; left: 35%; }
+.pos-social  { top: 65%; left: 15%; }
+.pos-typo    { top: 75%; left: 30%; }
+.pos-motion  { top: 88%; left: 45%; }
+
+/* Cụm ở giữa/gần Quote */
+.pos-visual  { top: 32%; left: 52%; }
+.pos-mini    { top: 55%; left: 52%; }
+.pos-modern  { top: 68%; left: 65%; }
+.pos-creative{ top: 45%; left: 62%; } /* Chữ mờ nằm lót dưới quote */
+
+/* --- STYLE CHO CÂU QUOTE --- */
+.cloud-quote {
+    position: absolute;
+    top: 25%; 
+    right: 10%; /* Căn sang phải */
+    text-align: right; /* Chữ căn lề phải */
+    z-index: 10;
+    pointer-events: none; /* Để chuột có thể bấm xuyên qua vào các tag bên dưới nếu bị che */
+}
+
+.cloud-quote p {
+    font-family: 'Urbanist', sans-serif;
+    font-style: italic;
+    color: #B91C1C; /* Màu đỏ đậm */
+    font-size: 64px; /* Chữ rất to */
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+/* Tạo hình dáng thụt thò cho câu quote giống ảnh */
+.q-line-1 { margin-right: 40px; }
+.q-line-2 { margin-right: 0px; }
+.q-line-3 { margin-right: 20px; }
+.q-line-4 { margin-right: 60px; }
+
+/* --- RESPONSIVE MOBILE (Màn hình nhỏ) --- */
+@media screen and (max-width: 900px) {
+    .cloud-container {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        gap: 15px;
+    }
+
+    .cloud-tag {
+        position: static;
+        transform: none;
+        font-size: 18px;
+    }
+    
+    .cloud-tag:hover {
+        transform: scale(1.1);
+    }
+
+    .cloud-quote {
+        position: static;
+        margin-top: 40px;
+        text-align: center;
+    }
+    
+    .cloud-quote p {
+        font-size: 40px;
+        margin-right: 0 !important; /* Reset margin trên mobile */
+    }
+}
+
+
+/* --- Style cho phần chứa ảnh đơn duy nhất --- */
+.single-image-container {
+    width: 100%;
+    max-width: 1400px; /* Giới hạn chiều rộng để ảnh không bị vỡ trên màn hình quá to */
+    margin: 0 auto;    /* Căn giữa container */
+    padding: 0 20px;   /* Khoảng cách an toàn 2 bên mép màn hình */
+    margin-bottom: 100px; /* Khoảng cách với phần nội dung bên dưới */
+}
+
+.full-intro-img {
+    width: 100%;       /* Ảnh co giãn theo khung */
+    height: auto;      /* Giữ tỉ lệ gốc của ảnh */
+    display: block;    /* Xóa khoảng trắng thừa dưới chân ảnh */
+    border-radius: 0px; /* Nếu muốn bo góc ảnh thì chỉnh số này (ví dụ: 20px) */
+}
+
+/* --- Style cho ảnh layer duy nhất --- */
+.single-layer-image {
+    width: 100%;
+    padding-bottom: 100px; /* Khoảng cách với footer */
+    background-color: #fff; /* Nền trắng nối liền với phần trên */
+}
+
+.image-wrapper {
+    width: 100%;
+    max-width: 1400px; /* Độ rộng tối đa để ảnh không bị quá khổ */
+    margin: 0 auto;    /* Căn giữa */
+    padding: 0 20px;   /* Khoảng cách lề màn hình mobile */
+}
+
+.main-layer-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Nếu bạn muốn ảnh bo tròn góc thì thêm border-radius ở đây */
+    /* border-radius: 20px; */ 
+    
+    /* Nếu bạn muốn ảnh đổ bóng để tách biệt khỏi nền trắng */
+    /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
+}
