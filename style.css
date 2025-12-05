@@ -1888,3 +1888,43 @@ overflow: hidden;
     /* Nếu bạn muốn ảnh đổ bóng để tách biệt khỏi nền trắng */
     /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
 }
+
+/* =========================================
+   THÊM MENU VÀO HERO (HOME - ABOUT - WORKS)
+   ========================================= */
+
+/* 1. Định dạng cụm bên trái để Logo và Menu nằm ngang hàng */
+.hero-left-group {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Khoảng cách giữa Logo và chữ HOME */
+}
+
+/* 2. Định dạng hàng chữ Menu */
+.hero-menu-links {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa các chữ HOME - ABOUT */
+}
+
+/* 3. Trang trí chữ (Giống hệt mẫu) */
+.hero-menu-links a {
+    text-decoration: none;
+    color: #fff; /* Màu trắng nổi trên nền đỏ */
+    font-family: 'Urbanist', sans-serif; /* Font chuẩn */
+    font-weight: 700; /* Chữ đậm */
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+}
+
+.hero-menu-links a:hover {
+    opacity: 0.7;
+}
+
+/* Ẩn menu này trên điện thoại để đỡ chật (Tùy chọn) */
+@media (max-width: 768px) {
+    .hero-menu-links {
+        display: none;
+    }
+}
