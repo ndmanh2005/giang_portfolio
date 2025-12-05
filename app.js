@@ -284,6 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         requestAnimationFrame(animateGridReveal);
     }
+    
 
     animateGridReveal();
 });

@@ -1928,3 +1928,352 @@ overflow: hidden;
         display: none;
     }
 }
+
+
+/* ... (Code cũ giữ nguyên) ... */
+
+/* =========================================
+   STYLE DANH SÁCH DỌC (WORK LIST - BILLIE STYLE)
+   (Dán vào cuối file style.css)
+   ========================================= */
+
+/* 1. Phần giới thiệu đầu trang (Work we're proud of) */
+.work-intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+    padding: 0 20px;
+}
+
+.work-intro-title {
+    font-size: 5rem; /* Chữ to */
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 24px;
+    color: #000;
+}
+
+.work-intro-desc {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 2. Container danh sách dọc */
+.project-vertical-list {
+    display: flex;
+    flex-direction: column;
+    gap: 120px; /* Khoảng cách giữa các dự án lớn */
+    max-width: 1000px; /* Giới hạn chiều rộng cho đẹp */
+    margin: 0 auto 150px auto;
+    padding: 0 40px;
+}
+
+/* 3. Từng khối dự án */
+.project-vertical-item {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Container ảnh: Ép về tỷ lệ chữ nhật ngang */
+.vertical-img-container {
+    width: 100%;
+    aspect-ratio: 16/9; /* Tỷ lệ ảnh chuẩn */
+    display: block;
+    margin-bottom: 30px;
+    /* Kế thừa hiệu ứng pixel/lưới từ class image-wrapper-raw cũ */
+}
+
+.vertical-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hiệu ứng zoom nhẹ khi di chuột vào khối */
+.project-vertical-item:hover .vertical-img-container img {
+    transform: scale(1.05);
+}
+
+/* 4. Dòng thông tin bên dưới (Title - Date - Arrow) */
+.project-vertical-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1); /* Đường kẻ mờ màu đen */
+}
+
+/* Tên dự án */
+.v-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 5px 0;
+    line-height: 1;
+    color: #000;
+}
+
+/* Ngày tháng/Loại */
+.v-cat {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888; /* Màu xám */
+}
+
+/* Nút mũi tên tròn */
+.arrow-circle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(0,0,0,0.2); /* Viền xám */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    color: #000;
+}
+
+/* Hover vào dự án thì mũi tên xoay và đổi màu */
+.project-vertical-item:hover .arrow-circle {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    transform: rotate(-45deg);
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .work-intro-title { font-size: 3rem; }
+    .project-vertical-list { padding: 0 20px; gap: 80px; }
+    .v-title { font-size: 1.8rem; }
+}
+
+/* --- PHẦN TIÊU ĐỀ URBANIST (ĐỎ TOÀN BỘ) --- */
+.work-intro {
+    text-align: center;
+    padding: 100px 0 80px 0;
+    max-width: 100%;
+}
+
+.work-intro-title {
+    font-family: 'Urbanist', sans-serif; /* Font mới */
+    font-size: 5rem;      /* Kích thước lớn */
+    font-weight: 900;     /* Độ đậm cao nhất của Urbanist (Bold/Black) */
+    color: #A8322D;       /* Màu đỏ cho toàn bộ tiêu đề */
+    line-height: 0.95;    /* Dòng xích lại gần nhau cho ngầu */
+    letter-spacing: -0.02em; 
+    text-transform: uppercase; /* In hoa toàn bộ tiêu đề */
+    margin-bottom: 24px;
+}
+
+.work-intro-desc {
+    font-family: 'Urbanist', sans-serif; /* Font mới */
+    font-size: 0.85rem;
+    font-weight: 600;     /* Đậm vừa phải */
+    color: #A8322D;       /* Màu đỏ cho cả đoạn mô tả */
+    text-transform: uppercase;
+    line-height: 1.6;
+    letter-spacing: 0.05em; /* Khoảng cách chữ thoáng hơn */
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 0.9;         /* Làm mờ nhẹ 1 chút để phân cấp với tiêu đề */
+}
+
+/* Responsive cho màn hình điện thoại */
+@media (max-width: 768px) {
+    .work-intro-title {
+        font-size: 3rem; /* Nhỏ lại trên mobile */
+    }
+    .work-intro-desc {
+        font-size: 0.75rem;
+        max-width: 90%;
+    }
+}
+
+/* Style cho tên dự án trong list dọc */
+.v-title {
+    font-family: 'Urbanist', sans-serif; /* Dùng font mới */
+    font-size: 2.5rem;    /* Kích thước lớn */
+    font-weight: 700;     /* In đậm */
+    color: #ffffff;       /* Mặc định màu trắng */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt */
+}
+
+/* Khi di chuột vào dự án thì tên chuyển màu ĐỎ */
+.project-vertical-item:hover .v-title {
+    color: #A8322D; 
+}
+
+/* Mũi tên tròn */
+.arrow-circle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Khi di chuột vào thì mũi tên đỏ lên */
+.project-vertical-item:hover .arrow-circle {
+    background-color: #A8322D;
+    border-color: #A8322D;
+    color: #fff;
+    transform: rotate(-45deg); /* Xoay mũi tên chéo lên */
+}
+/* =========================================
+   STYLE FOOTER MỚI (GIỐNG ẢNH MẪU 100%)
+   ========================================= */
+
+/* =========================================
+   FOOTER FIX CỨNG (GIỐNG CODE CŨ CỦA BẠN)
+   ========================================= */
+
+/* 1. Thiết lập chiều cao cố định để không bị lệch */
+.red-footer {
+    position: fixed; /* Hoặc sticky tùy code gốc, nhưng fixed chuẩn hơn cho hiệu ứng reveal */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    
+    background-color: #9E332E;
+    color: #ffffff;
+    
+    /* QUAN TRỌNG: Cố định chiều cao giống code cũ của bạn */
+    height: 480px !important; 
+    
+    padding: 0 60px; /* Chỉ padding ngang, dọc để flex lo */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+    box-sizing: border-box;
+}
+
+/* 2. Ép lớp nội dung trắng bên trên chừa ra đúng khoảng cách đó */
+.content-layer, 
+.cs-content-layer {
+    position: relative;
+    z-index: 10;
+    background-color: #ffffff;
+    width: 100%;
+    
+    /* QUAN TRỌNG: Số này PHẢI BẰNG height của footer (480px) */
+    margin-bottom: 480px !important; 
+    
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+/* --- CSS GIAO DIỆN (ĐẸP NHƯ ẢNH) --- */
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Gióng đáy */
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 60px 0; /* Padding nội bộ */
+}
+
+/* Cột Trái */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+}
+
+.footer-cta {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 7rem; 
+    font-weight: 800;
+    line-height: 0.9;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.location-text {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+/* Cột Phải */
+.footer-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    height: 100%;
+}
+
+.footer-icon { margin-bottom: 10px; }
+.footer-icon svg { transform: rotate(-15deg); }
+
+.contact-group p {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.1rem;
+    margin: 4px 0;
+    font-weight: 500;
+}
+.contact-header { font-weight: 800 !important; font-size: 1.2rem !important; margin-bottom: 5px !important; }
+
+.footer-links-row {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 25px;
+}
+.footer-links-row a {
+    color: #fff;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.footer-copyright {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 900px) {
+    .red-footer {
+        position: relative; /* Mobile thì bỏ hiệu ứng dính */
+        height: auto !important; /* Mobile cho cao tự do */
+        padding: 60px 20px;
+    }
+    
+    .content-layer, .cs-content-layer {
+        margin-bottom: 0 !important; /* Mobile không cần chừa margin */
+    }
+
+    .footer-container { flex-direction: column; align-items: flex-start; gap: 40px; padding: 0; }
+    .footer-cta { font-size: 4rem; white-space: normal; }
+    .footer-right { align-items: flex-start; text-align: left; width: 100%; }
+    .footer-icon { display: none; }
+}
