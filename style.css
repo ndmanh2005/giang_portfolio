@@ -1719,134 +1719,229 @@ overflow: hidden;
 }
 
 /* --- CẤU HÌNH KHUNG CHỨA (CONTAINER) --- */
+/* =========================================
+   CLOUD HERO SECTION (FIXED: VỊ TRÍ CŨ - STYLE MỚI)
+   ========================================= */
+/* =========================================
+   CLOUD HERO SECTION (FULL WIDTH - GIÃN SÁT LỀ)
+   ========================================= */
+
 .cs-hero-section.cloud-mode {
     position: relative;
     width: 100%;
-    min-height: 100vh; /* Chiếm gần hết chiều cao màn hình để thoáng */
+    min-height: 85vh; 
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #fff; /* Đảm bảo nền trắng */
+    background-color: #fff;
 }
 
 .cloud-container {
     position: relative;
     width: 100%;
-    max-width: 1400px; /* Mở rộng khung để giống ảnh */
-    height: 600px;
+    
+    /* THAY ĐỔI: Mở rộng tối đa để chữ có thể chạm lề màn hình */
+    max-width: 98%; 
+    
+    height: 650px; 
+    margin: 0 auto;
 }
 
-/* --- STYLE CHO TỪ KHÓA (TAGS) --- */
+/* --- 1. STYLE TỪ KHÓA (CHUNG) --- */
 .cloud-tag {
     position: absolute;
     font-family: 'Urbanist', sans-serif;
-    font-weight: 700;
-    color: #C0C0C0; /* Màu xám nhạt (như ảnh) */
+    font-weight: 700; 
+    color: #C0C0C0;   
     text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.3s ease;
-    
-    /* Mẹo: Dùng translate để căn tâm chính xác tại điểm top/left */
     transform: translate(-50%, -50%); 
+    
+    /* Chữ to vừa đủ đẹp */
+    font-size: 3.2vw; 
+    z-index: 2; 
 }
 
-/* Kích thước chữ cho các tag thường */
-.cloud-tag { font-size: 26px; }
-
-/* Riêng từ MOTION GRAPHIC to hơn chút vì nó dài */
-.pos-motion { font-size: 28px; }
-
-/* Từ CREATIVE màu rất nhạt (như ảnh) */
-.pos-creative { 
-    color: #E5E5E5; 
-    font-size: 32px;
-    z-index: 1; /* Nằm dưới các layer khác */
-}
-
-/* Hiệu ứng Hover: Đổi màu đỏ */
 .cloud-tag:hover {
-    color: #B91C1C;
-    transform: translate(-50%, -50%) scale(1.1);
-    z-index: 100; /* Nổi lên trên cùng khi hover */
+    .cloud-tag:hover {
+    color: #B91C1C; /* Đổi màu đỏ */
+    z-index: 100;   /* Nổi lên trên cùng */
+    
+    /* CẤU HÌNH NHẢY LIÊN TỤC:
+       - jumpLoop: tên animation
+       - 0.5s: Tốc độ nhảy (càng nhỏ nhảy càng nhanh)
+       - ease-in-out: Chuyển động mượt mà (nhanh dần rồi chậm dần)
+       - infinite: Lặp lại VÔ TẬN (không dừng lại)
+    */
+    animation: jumpLoop 0.5s ease-in-out infinite;
+}
 }
 
-/* --- TỌA ĐỘ VỊ TRÍ (Đã đo đạc lại theo ảnh) --- */
-/* Cụm bên trái */
-.pos-2d      { top: 25%; left: 25%; }
-.pos-pack    { top: 38%; left: 32%; }
-.pos-brand   { top: 48%; left: 18%; }
-.pos-ux      { top: 55%; left: 35%; }
-.pos-social  { top: 65%; left: 15%; }
-.pos-typo    { top: 75%; left: 30%; }
-.pos-motion  { top: 88%; left: 45%; }
-
-/* Cụm ở giữa/gần Quote */
-.pos-visual  { top: 32%; left: 52%; }
-.pos-mini    { top: 55%; left: 52%; }
-.pos-modern  { top: 68%; left: 65%; }
-.pos-creative{ top: 45%; left: 62%; } /* Chữ mờ nằm lót dưới quote */
-
-/* --- STYLE CHO CÂU QUOTE --- */
+/* --- 2. STYLE QUOTE ĐỎ (SÁT LỀ PHẢI) --- */
 .cloud-quote {
     position: absolute;
     top: 25%; 
-    right: 10%; /* Căn sang phải */
-    text-align: right; /* Chữ căn lề phải */
+    
+    /* Đẩy sát lề phải hơn (chỉ cách 2%) */
+    right: 2%; 
+    
+    text-align: right; 
     z-index: 10;
-    pointer-events: none; /* Để chuột có thể bấm xuyên qua vào các tag bên dưới nếu bị che */
+    pointer-events: none; 
 }
 
 .cloud-quote p {
     font-family: 'Urbanist', sans-serif;
     font-style: italic;
-    color: #B91C1C; /* Màu đỏ đậm */
-    font-size: 64px; /* Chữ rất to */
-    line-height: 1.1;
+    color: #B91C1C; 
+    font-weight: 900; 
+    font-size: 6.5vw;  /* Dùng vw để chữ luôn to đại bác */
+    line-height: 0.85; 
     margin: 0;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
 }
 
-/* Tạo hình dáng thụt thò cho câu quote giống ảnh */
-.q-line-1 { margin-right: 40px; }
-.q-line-2 { margin-right: 0px; }
-.q-line-3 { margin-right: 20px; }
-.q-line-4 { margin-right: 60px; }
+.q-line-1 { margin-right: 0.6em; }
+.q-line-2 { margin-right: 0em; }
+.q-line-3 { margin-right: 0.3em; }
+.q-line-4 { margin-right: 0.9em; }
 
-/* --- RESPONSIVE MOBILE (Màn hình nhỏ) --- */
+
+/* --- 3. TỌA ĐỘ MỚI (GIÃN SANG 2 BÊN) --- */
+
+/* --- NHÓM TRÁI (Đẩy sát mép trái: left từ 5% -> 20%) --- */
+
+/* Social Media: Thấp nhất, sát trái nhất */
+.pos-social { 
+    top: 70%; 
+    left: 8%; /* Sát lề */
+} 
+
+/* Branding: Ở giữa, sát trái */
+.pos-brand { 
+    top: 45%; 
+    left: 10%; /* Sát lề */
+} 
+
+/* 2D Designs: Cao, sát trái */
+.pos-2d { 
+    top: 20%; 
+    left: 18%; 
+} 
+
+/* --- NHÓM GIỮA (Dàn đều) --- */
+
+/* Packaging: Lệch trái chút */
+.pos-pack { 
+    top: 35%; 
+    left: 30%; 
+} 
+
+/* UX/UI: Giữa màn hình */
+.pos-ux { 
+    top: 55%; 
+    left: 35%; 
+} 
+
+/* Typography: Thấp, lệch trái */
+.pos-typo { 
+    top: 80%; 
+    left: 25%; 
+} 
+
+/* Motion Graphic: Thấp nhất, chính giữa */
+.pos-motion { 
+    top: 90%; 
+    left: 50%; 
+    font-size: 2.5vw; /* To hơn chút */
+}
+
+/* --- NHÓM PHẢI (Gần Quote đỏ) --- */
+
+/* Visual: Cao, gần quote */
+.pos-visual { 
+    top: 25%; 
+    left: 55%; 
+} 
+
+/* Minimalism: Giữa, dưới quote */
+.pos-mini { 
+    top: 60%; 
+    left: 60%; 
+} 
+
+/* Modern: Thấp, lệch phải (dưới đuôi chữ đỏ) */
+.pos-modern { 
+    top: 75%; 
+    left: 75%; 
+} 
+
+/* Creative: Nằm lót dưới chữ đỏ */
+.pos-creative { 
+    top: 42%; 
+    left: 65%; 
+    color: #C0C0C0; 
+    font-size: 2.2vw;
+    z-index: 1; 
+}
+
+
+
+/* --- MOBILE RESPONSIVE --- */
 @media screen and (max-width: 900px) {
     .cloud-container {
         height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 50px;
+        padding: 60px 0;
         gap: 15px;
     }
-
     .cloud-tag {
         position: static;
         transform: none;
-        font-size: 18px;
+        font-size: 1.5rem;
     }
-    
-    .cloud-tag:hover {
-        transform: scale(1.1);
-    }
-
     .cloud-quote {
         position: static;
         margin-top: 40px;
         text-align: center;
     }
-    
     .cloud-quote p {
-        font-size: 40px;
-        margin-right: 0 !important; /* Reset margin trên mobile */
+        font-size: 3.5rem;
+        margin-right: 0 !important;
     }
 }
 
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 900px) {
+    .cloud-container {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 0;
+        gap: 15px;
+    }
+    .cloud-tag {
+        position: static;
+        transform: none;
+        font-size: 1.5rem;
+    }
+    .cloud-quote {
+        position: static;
+        margin-top: 40px;
+        text-align: center;
+    }
+    .cloud-quote p {
+        font-size: 3.5rem;
+        margin-right: 0 !important;
+    }
+}
 
 /* --- Style cho phần chứa ảnh đơn duy nhất --- */
 .single-image-container {
@@ -1901,27 +1996,69 @@ overflow: hidden;
 }
 
 /* 2. Định dạng hàng chữ Menu */
-.hero-menu-links {
+/* 1. Trạng thái mặc định của các link (Mờ đi một chút) */
+/* =========================================
+   FIX LỖI MENU (GIỮ NGUYÊN MÀU + HIỆU ỨNG ACTIVE)
+   ========================================= */
+
+/* 1. MENU TRANG CHỦ (Nền đỏ - Chữ trắng) */
+/* =========================================
+   MENU HEADER (FIX: ĐẬM LUÔN + GIÃN CÁCH RỘNG)
+   ========================================= */
+
+/* 1. CẤU HÌNH KHUNG BAO NGOÀI (Tăng khoảng cách ở đây) */
+.hero-menu-links, 
+.nav-links {
     display: flex;
-    gap: 30px; /* Khoảng cách giữa các chữ HOME - ABOUT */
+    /* --- SỬA Ở ĐÂY: Tăng khoảng cách các chữ --- */
+    gap: 40px !important; /* Cũ là 30px, giờ tăng gấp đôi cho thoáng */
+    /* ------------------------------------------ */
 }
 
-/* 3. Trang trí chữ (Giống hệt mẫu) */
+/* 2. MENU TRANG CHỦ (Chữ Trắng) */
 .hero-menu-links a {
+    color: #ffffff !important; 
     text-decoration: none;
-    color: #fff; /* Màu trắng nổi trên nền đỏ */
-    font-family: 'Urbanist', sans-serif; /* Font chuẩn */
-    font-weight: 700; /* Chữ đậm */
-    font-size: 1rem;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem; 
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
+    
+    /* MẶC ĐỊNH: Mờ và Mảnh hơn */
+    opacity: 0.5;      
+    font-weight: 600;  
 }
 
+/* KHI ĐANG Ở TRANG ĐÓ (ACTIVE) HOẶC DI CHUỘT VÀO */
+.hero-menu-links a.active,
 .hero-menu-links a:hover {
-    opacity: 0.7;
+    opacity: 1 !important;        /* Hiện rõ 100% */
+    font-weight: 800 !important;  /* Đậm luôn */
 }
 
+
+/* 3. MENU TRANG CON - ABOUT/WORK (Chữ Đỏ) */
+.nav-links a {
+    color: #A8322D !important; 
+    text-decoration: none;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s ease;
+    
+    /* MẶC ĐỊNH: Mờ và Mảnh hơn */
+    opacity: 0.5;
+    font-weight: 600;
+}
+
+/* KHI ĐANG Ở TRANG ĐÓ (ACTIVE) HOẶC DI CHUỘT VÀO */
+.nav-links a.active,
+.nav-links a:hover {
+    opacity: 1 !important;        /* Hiện rõ 100% */
+    font-weight: 800 !important;  /* Đậm luôn */
+}
 /* Ẩn menu này trên điện thoại để đỡ chật (Tùy chọn) */
 @media (max-width: 768px) {
     .hero-menu-links {
@@ -2276,4 +2413,170 @@ overflow: hidden;
     .footer-cta { font-size: 4rem; white-space: normal; }
     .footer-right { align-items: flex-start; text-align: left; width: 100%; }
     .footer-icon { display: none; }
+}
+
+/* =========================================
+   ABOUT PAGE: SPLIT LAYOUT (PHIÊN BẢN NỀN TRẮNG)
+   ========================================= */
+
+/* 1. Thiết lập nền trắng */
+.about-split-section {
+    width: 100vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    background-color: #ffffff; /* NỀN TRẮNG */
+    color: #111111;            /* CHỮ ĐEN */
+    overflow: hidden;
+}
+
+.about-split-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- CỘT TRÁI (CHỮ) --- */
+.about-left-text {
+    width: 50%;
+    padding: 10px 60px 0 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.about-headline {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 5rem;
+    font-weight: 800; /* Đậm hơn chút để nổi trên nền trắng */
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+    color: #000000; /* Chữ đen tuyệt đối */
+}
+
+.about-bio {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem; /* Tăng nhẹ cỡ chữ cho dễ đọc */
+    line-height: 1.6;
+    color: #333333; /* Màu xám đậm */
+    text-transform: uppercase;
+    max-width: 550px;
+    margin-bottom: 80px;
+    font-weight: 600;
+}
+
+/* Khu vực danh sách */
+.about-lists-row {
+    display: flex;
+    gap: 100px;
+}
+
+.list-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.list-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #999; /* Tiêu đề màu xám nhạt */
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.list-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-col ul li {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    color: #000; /* Mục danh sách màu đen */
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- CỘT PHẢI (ẢNH) --- */
+.about-right-image {
+    width: 50%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-right-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 900px) {
+    .about-split-container {
+        flex-direction: column-reverse; /* Ảnh trên - Chữ dưới */
+    }
+    
+    .about-left-text, 
+    .about-right-image {
+        width: 100%;
+    }
+
+    .about-right-image {
+        height: 50vh;
+    }
+
+    .about-headline {
+        font-size: 3rem;
+    }
+    
+    .about-left-text {
+        padding: 60px 20px;
+    }
+
+    .about-lists-row {
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================================
+   FIX LỖI ANIMATION NHẢY (FINAL)
+   ========================================= */
+
+/* 1. Định nghĩa lại cú nhảy (Bắt buộc phải giữ translate -50% -50% để không bị lệch tâm) */
+@keyframes jumpFixed {
+    0% { 
+        /* Vị trí thấp nhất (Gốc) */
+        transform: translate(-50%, -50%) scale(1.1); 
+    }
+    50% { 
+        /* Vị trí cao nhất (Nhảy lên) */
+        /* Chỉ thay đổi số -50% sau thành -70% để nhảy lên theo trục dọc */
+        transform: translate(-50%, -70%) scale(1.1); 
+    }
+    100% { 
+        /* Rơi xuống lại */
+        transform: translate(-50%, -50%) scale(1.1); 
+    }
+}
+
+/* 2. Áp dụng vào Hover */
+.cloud-tag:hover {
+    color: #B91C1C !important; /* Dùng !important để chắc chắn màu đỏ hiện ra */
+    z-index: 100;
+    
+    /* Chạy animation tên là jumpFixed, 0.6s một nhịp, lặp vô tận */
+    animation: jumpFixed 0.6s ease-in-out infinite;
+    
+    /* Giúp chuyển động mượt hơn trên trình duyệt */
+    will-change: transform; 
 }
