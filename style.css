@@ -1996,27 +1996,69 @@ overflow: hidden;
 }
 
 /* 2. Định dạng hàng chữ Menu */
-.hero-menu-links {
+/* 1. Trạng thái mặc định của các link (Mờ đi một chút) */
+/* =========================================
+   FIX LỖI MENU (GIỮ NGUYÊN MÀU + HIỆU ỨNG ACTIVE)
+   ========================================= */
+
+/* 1. MENU TRANG CHỦ (Nền đỏ - Chữ trắng) */
+/* =========================================
+   MENU HEADER (FIX: ĐẬM LUÔN + GIÃN CÁCH RỘNG)
+   ========================================= */
+
+/* 1. CẤU HÌNH KHUNG BAO NGOÀI (Tăng khoảng cách ở đây) */
+.hero-menu-links, 
+.nav-links {
     display: flex;
-    gap: 30px; /* Khoảng cách giữa các chữ HOME - ABOUT */
+    /* --- SỬA Ở ĐÂY: Tăng khoảng cách các chữ --- */
+    gap: 40px !important; /* Cũ là 30px, giờ tăng gấp đôi cho thoáng */
+    /* ------------------------------------------ */
 }
 
-/* 3. Trang trí chữ (Giống hệt mẫu) */
+/* 2. MENU TRANG CHỦ (Chữ Trắng) */
 .hero-menu-links a {
+    color: #ffffff !important; 
     text-decoration: none;
-    color: #fff; /* Màu trắng nổi trên nền đỏ */
-    font-family: 'Urbanist', sans-serif; /* Font chuẩn */
-    font-weight: 700; /* Chữ đậm */
-    font-size: 1rem;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem; 
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
+    
+    /* MẶC ĐỊNH: Mờ và Mảnh hơn */
+    opacity: 0.5;      
+    font-weight: 600;  
 }
 
+/* KHI ĐANG Ở TRANG ĐÓ (ACTIVE) HOẶC DI CHUỘT VÀO */
+.hero-menu-links a.active,
 .hero-menu-links a:hover {
-    opacity: 0.7;
+    opacity: 1 !important;        /* Hiện rõ 100% */
+    font-weight: 800 !important;  /* Đậm luôn */
 }
 
+
+/* 3. MENU TRANG CON - ABOUT/WORK (Chữ Đỏ) */
+.nav-links a {
+    color: #A8322D !important; 
+    text-decoration: none;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s ease;
+    
+    /* MẶC ĐỊNH: Mờ và Mảnh hơn */
+    opacity: 0.5;
+    font-weight: 600;
+}
+
+/* KHI ĐANG Ở TRANG ĐÓ (ACTIVE) HOẶC DI CHUỘT VÀO */
+.nav-links a.active,
+.nav-links a:hover {
+    opacity: 1 !important;        /* Hiện rõ 100% */
+    font-weight: 800 !important;  /* Đậm luôn */
+}
 /* Ẩn menu này trên điện thoại để đỡ chật (Tùy chọn) */
 @media (max-width: 768px) {
     .hero-menu-links {
