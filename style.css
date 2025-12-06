@@ -2277,3 +2277,136 @@ overflow: hidden;
     .footer-right { align-items: flex-start; text-align: left; width: 100%; }
     .footer-icon { display: none; }
 }
+
+/* =========================================
+   ABOUT PAGE: SPLIT LAYOUT (PHIÊN BẢN NỀN TRẮNG)
+   ========================================= */
+
+/* 1. Thiết lập nền trắng */
+.about-split-section {
+    width: 100vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    background-color: #ffffff; /* NỀN TRẮNG */
+    color: #111111;            /* CHỮ ĐEN */
+    overflow: hidden;
+}
+
+.about-split-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- CỘT TRÁI (CHỮ) --- */
+.about-left-text {
+    width: 50%;
+    padding: 10px 60px 0 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.about-headline {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 5rem;
+    font-weight: 800; /* Đậm hơn chút để nổi trên nền trắng */
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+    color: #000000; /* Chữ đen tuyệt đối */
+}
+
+.about-bio {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem; /* Tăng nhẹ cỡ chữ cho dễ đọc */
+    line-height: 1.6;
+    color: #333333; /* Màu xám đậm */
+    text-transform: uppercase;
+    max-width: 550px;
+    margin-bottom: 80px;
+    font-weight: 600;
+}
+
+/* Khu vực danh sách */
+.about-lists-row {
+    display: flex;
+    gap: 100px;
+}
+
+.list-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.list-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #999; /* Tiêu đề màu xám nhạt */
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.list-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-col ul li {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    color: #000; /* Mục danh sách màu đen */
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- CỘT PHẢI (ẢNH) --- */
+.about-right-image {
+    width: 50%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-right-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 900px) {
+    .about-split-container {
+        flex-direction: column-reverse; /* Ảnh trên - Chữ dưới */
+    }
+    
+    .about-left-text, 
+    .about-right-image {
+        width: 100%;
+    }
+
+    .about-right-image {
+        height: 50vh;
+    }
+
+    .about-headline {
+        font-size: 3rem;
+    }
+    
+    .about-left-text {
+        padding: 60px 20px;
+    }
+
+    .about-lists-row {
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+}
